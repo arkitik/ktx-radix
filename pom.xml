@@ -7,7 +7,7 @@
     <groupId>io.quee.ktx.radix</groupId>
     <artifactId>ktx-radix</artifactId>
     <packaging>pom</packaging>
-    <version>v1.0.0-RELEASE</version>
+    <version>v1.0.1-RELEASE</version>
     <modules>
         <module>ktx-radix-port</module>
         <module>ktx-radix-adapter</module>
@@ -122,6 +122,21 @@
                             <goals>
                                 <goal>test-compile</goal>
                             </goals>
+                        </execution>
+                        <execution>
+                            <id>kapt</id>
+                            <goals>
+                                <goal>kapt</goal>
+                            </goals>
+                            <configuration>
+                                <annotationProcessorPaths>
+                                    <annotationProcessorPath>
+                                        <groupId>org.springframework.boot</groupId>
+                                        <artifactId>spring-boot-configuration-processor</artifactId>
+                                        <version>${spring-boot.version}</version>
+                                    </annotationProcessorPath>
+                                </annotationProcessorPaths>
+                            </configuration>
                         </execution>
                     </executions>
                     <configuration>
