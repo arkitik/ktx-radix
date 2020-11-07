@@ -9,13 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ktx-radix-development-store</artifactId>
-
+    <artifactId>ktx-radix-development-usecase-adapter</artifactId>
     <dependencies>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>ktx-radix-development-identity</artifactId>
+            <artifactId>ktx-radix-development-usecase</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
+
 </project>

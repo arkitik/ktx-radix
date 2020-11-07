@@ -13,13 +13,13 @@ import io.quee.ktx.radix.develop.usecase.model.UseCaseResponse
 infix fun <RQ : UseCaseRequest, RS : UseCaseResponse> FunctionalUseCase<RQ, RS>.process(request: RQ) =
         request.process()
 
-infix fun <RQ : UseCaseRequest, RS : UseCaseResponse> FunctionalUseCase<RQ, RS>.providerProcess(requestProvider: () -> RQ) =
+infix fun <RQ : UseCaseRequest, RS : UseCaseResponse> FunctionalUseCase<RQ, RS>.process(requestProvider: () -> RQ) =
         this process requestProvider()
 
 infix fun <RQ : UseCaseRequest> CommandUseCase<RQ>.execute(request: RQ) =
         request.execute()
 
-infix fun <RQ : UseCaseRequest> CommandUseCase<RQ>.providerExecute(requestProvider: () -> RQ) =
+infix fun <RQ : UseCaseRequest> CommandUseCase<RQ>.execute(requestProvider: () -> RQ) =
         this execute requestProvider()
 
 infix fun <F : UseCaseFactory, RQ : UseCaseRequest, RS : UseCaseResponse> F.functional(functionalUseCase: F.() -> FunctionalUseCase<RQ, RS>) =
