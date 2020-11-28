@@ -11,22 +11,22 @@ import com.google.gson.JsonObject
  */
 class KtxJsonObjectBuilder internal constructor() {
 
-    private val obj = JsonObject()
+    private val jsonObject = JsonObject()
 
     /**
      * Add a property with the given key
      *
      * Syntax: "key" to value
      */
-    infix fun String.to(value: Any?) {
+    infix fun <T> String.to(value: T?) {
         when (value) {
-            is Boolean -> obj.addProperty(this, value)
-            is Char -> obj.addProperty(this, value)
-            is String -> obj.addProperty(this, value)
-            is Number -> obj.addProperty(this, value)
-            is JsonElement -> obj.add(this, value)
-            null -> obj.add(this, JsonNull.INSTANCE)
-            else -> obj.addProperty(this, value.toString())
+            is Boolean -> jsonObject.addProperty(this, value)
+            is Char -> jsonObject.addProperty(this, value)
+            is String -> jsonObject.addProperty(this, value)
+            is Number -> jsonObject.addProperty(this, value)
+            is JsonElement -> jsonObject.add(this, value)
+            null -> jsonObject.add(this, JsonNull.INSTANCE)
+            else -> jsonObject.addProperty(this, value.toString())
         }
     }
 
@@ -34,7 +34,7 @@ class KtxJsonObjectBuilder internal constructor() {
      * Return the completed [JsonObject]
      */
     internal fun build(): JsonObject {
-        return obj
+        return jsonObject
     }
 
 }
