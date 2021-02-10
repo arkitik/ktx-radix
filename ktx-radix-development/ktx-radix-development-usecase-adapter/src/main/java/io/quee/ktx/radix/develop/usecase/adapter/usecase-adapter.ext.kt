@@ -11,34 +11,41 @@ import io.quee.ktx.radix.develop.usecase.model.UseCaseResponse
  * Project **ktx-radix** [Quee.IO](https://quee.io)
  */
 infix fun <RQ, RS> FunctionalUseCase<RequestAdapter<RQ>, ResponseAdapter<RS>>.adapterProcess(request: RQ) =
-        (this process RequestAdapter(request)).response
+    (this process RequestAdapter(request)).response
 
 infix fun <RQ, RS : UseCaseResponse> FunctionalUseCase<RequestAdapter<RQ>, RS>.adapterProcess(request: RQ) =
-        this process RequestAdapter(request)
+    this process RequestAdapter(request)
 
 infix fun <RQ : UseCaseRequest, RS> FunctionalUseCase<RQ, ResponseAdapter<RS>>.adapterProcess(request: RQ) =
-        (this process request).response
+    (this process request).response
 
 infix fun <RQ, RS> FunctionalUseCase<RequestAdapter<RQ>, ResponseAdapter<RS>>.adapterProcess(requestProvider: () -> RQ) =
-        this adapterProcess requestProvider()
+    this adapterProcess requestProvider()
 
 infix fun <RQ, RS : UseCaseResponse> FunctionalUseCase<RequestAdapter<RQ>, RS>.adapterProcess(request: () -> RQ) =
-        this adapterProcess request()
+    this adapterProcess request()
+
+infix fun <RQ : UseCaseRequest, D> FunctionalUseCase<RQ, ResponseAdapter<D>>.asResponse(response: D) =
+    ResponseAdapter(response)
+
+infix fun <RQ : UseCaseRequest, D> FunctionalUseCase<RQ, ResponseAdapter<D>>.toResponse(response: FunctionalUseCase<RQ, ResponseAdapter<D>>.() -> D) =
+    ResponseAdapter(response())
 
 infix fun <RQ> CommandUseCase<RequestAdapter<RQ>>.adapterExecute(request: RQ) =
-        this execute RequestAdapter(request)
+    this execute RequestAdapter(request)
 
 infix fun <RQ> CommandUseCase<RequestAdapter<RQ>>.adapterExecute(requestProvider: () -> RQ) =
-        this adapterExecute requestProvider()
+    this adapterExecute requestProvider()
 
 infix fun <F : UseCaseFactory, RQ, RS> F.adapterFunctional(functionalUseCase: F.() -> FunctionalUseCase<RequestAdapter<RQ>, ResponseAdapter<RS>>) =
-        this functional functionalUseCase
+    this functional functionalUseCase
 
 infix fun <F : UseCaseFactory, RQ : UseCaseRequest, RS> F.adapterFunctionalReq(functionalUseCase: F.() -> FunctionalUseCase<RQ, ResponseAdapter<RS>>) =
-        this functional functionalUseCase
+    this functional functionalUseCase
 
 infix fun <F : UseCaseFactory, RQ, RS : UseCaseResponse> F.adapterFunctionalResp(functionalUseCase: F.() -> FunctionalUseCase<RequestAdapter<RQ>, RS>) =
-        this functional functionalUseCase
+    this functional functionalUseCase
 
 infix fun <F : UseCaseFactory, RQ> F.adapterCommand(commandUseCase: F.() -> CommandUseCase<RequestAdapter<RQ>>) =
-        this command commandUseCase
+    this command commandUseCase
+

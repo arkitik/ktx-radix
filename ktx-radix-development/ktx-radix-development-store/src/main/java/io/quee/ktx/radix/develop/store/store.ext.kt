@@ -2,6 +2,7 @@ package io.quee.ktx.radix.develop.store
 
 import io.quee.ktx.radix.develop.identity.Identity
 import io.quee.ktx.radix.develop.store.creator.StoreIdentityCreator
+import io.quee.ktx.radix.develop.store.updater.StoreIdentityUpdater
 import java.io.Serializable
 
 /**
@@ -22,17 +23,22 @@ infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.delete(identities: 
 
 infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.deleteIds(ids: List<ID>) = ids.deleteAllByIds()
 
-infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.updater(identity: I) =
-        identity.identityUpdater()
+infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.updater(
+    identity: I
+): StoreIdentityUpdater<ID, I> = identity.identityUpdater()
 
-infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.creatorDo(creatorFun: StoreIdentityCreator<ID, I>.() -> I) =
-        creatorFun(identityCreator())
+infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.creator(
+    creatorFun: StoreIdentityCreator<ID, I>.() -> StoreIdentityCreator<ID, I>
+): StoreIdentityCreator<ID, I> = creatorFun(identityCreator())
 
-infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.creator(creatorFun: StoreIdentityCreator<ID, I>.() -> StoreIdentityCreator<ID, I>) =
-        creatorFun(identityCreator()).create()
+infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.creatorDo(
+    creatorFun: StoreIdentityCreator<ID, I>.() -> I
+): I = creatorFun(identityCreator())
 
-infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.saveCreator(creatorFun: StoreIdentityCreator<ID, I>.() -> I) =
-        creatorFun(identityCreator()).save()
+infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.saveCreator(
+    creatorFun: StoreIdentityCreator<ID, I>.() -> I
+): I = this save creatorDo(creatorFun)
 
-infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.saveCreatorFun(creatorFun: StoreIdentityCreator<ID, I>.() -> StoreIdentityCreator<ID, I>) =
-        creatorFun(identityCreator()).create().save()
+infix fun <ID : Serializable, I : Identity<ID>> Store<ID, I>.saveCreatorFun(
+    creatorFun: StoreIdentityCreator<ID, I>.() -> StoreIdentityCreator<ID, I>
+): I = creatorFun(identityCreator()).create().save()

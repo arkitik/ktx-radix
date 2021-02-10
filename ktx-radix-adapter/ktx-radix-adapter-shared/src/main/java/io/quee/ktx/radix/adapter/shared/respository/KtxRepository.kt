@@ -1,8 +1,8 @@
 package io.quee.ktx.radix.adapter.shared.respository
 
 import io.quee.ktx.radix.develop.identity.Identity
-import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.repository.NoRepositoryBean
+import org.springframework.data.repository.PagingAndSortingRepository
 import java.io.Serializable
 
 /**
@@ -11,6 +11,6 @@ import java.io.Serializable
  * Project *ktx-radix* [Quee.IO]
  */
 @NoRepositoryBean
-interface MainRepository<ID : Serializable, I : Identity<ID>> : JpaRepository<I, ID> {
+interface KtxRepository<ID : Serializable, I : Identity<ID>> : PagingAndSortingRepository<I, ID> {
     fun findByUuid(id: ID): I?
 }

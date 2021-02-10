@@ -1,7 +1,7 @@
 package io.quee.ktx.radix.adapter.shared.query
 
 import io.quee.ktx.radix.adapter.shared.paged
-import io.quee.ktx.radix.adapter.shared.respository.MainRepository
+import io.quee.ktx.radix.adapter.shared.respository.KtxRepository
 import io.quee.ktx.radix.develop.identity.Identity
 import io.quee.ktx.radix.develop.store.query.PageData
 import io.quee.ktx.radix.develop.store.query.StoreQuery
@@ -14,12 +14,12 @@ import java.io.Serializable
  * Project *ktx-radix* [Quee.IO]
  */
 open class StoreQueryImpl<ID : Serializable, I : Identity<ID>, E : I>(
-        private val mainRepository: MainRepository<ID, E>
+    private val repository: KtxRepository<ID, E>
 ) : StoreQuery<ID, I> {
-    override fun find(uuid: ID): I? = mainRepository.findByUuid(uuid)
-    override fun exist(uuid: ID): Boolean = mainRepository.existsById(uuid)
-    override fun allByUuids(uuids: List<ID>): Iterable<I> = mainRepository.findAllById(uuids)
-    override fun all(): List<I> = mainRepository.findAll()
+    override fun find(uuid: ID): I? = repository.findByUuid(uuid)
+    override fun exist(uuid: ID): Boolean = repository.existsById(uuid)
+    override fun allByUuids(uuids: List<ID>): Iterable<I> = repository.findAllById(uuids)
+    override fun all(): List<I> = repository.findAll().toList()
     override fun all(page: Int, size: Int): PageData<I> =
-            this paged mainRepository.findAll(PageRequest.of(page, size))
+        this paged repository.findAll(PageRequest.of(page, size))
 }

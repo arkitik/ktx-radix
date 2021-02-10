@@ -1,7 +1,7 @@
 package io.quee.ktx.radix.adapter.shared
 
 import io.quee.ktx.radix.adapter.shared.query.StoreQueryImpl
-import io.quee.ktx.radix.adapter.shared.respository.MainRepository
+import io.quee.ktx.radix.adapter.shared.respository.KtxRepository
 import io.quee.ktx.radix.develop.identity.Identity
 import io.quee.ktx.radix.develop.store.Store
 import io.quee.ktx.radix.develop.store.query.StoreQuery
@@ -13,28 +13,28 @@ import java.io.Serializable
  * Project *ktx-radix* [Quee.IO]
  */
 abstract class StoreImpl<ID : Serializable, I : Identity<ID>, E : I>(
-        private val mainRepository: MainRepository<ID, E>
+    private val repository: KtxRepository<ID, E>
 ) : Store<ID, I> {
-    override fun ID.delete() = mainRepository.deleteById(this)
-    override fun I.delete() = mainRepository.delete(map())
+    override fun ID.delete() = repository.deleteById(this)
+    override fun I.delete() = repository.delete(map())
     abstract fun I.map(): E
-    override fun I.save(): I = mainRepository.save(this.map())
-    override fun List<I>.save(): Iterable<I> = mainRepository.saveAll(map {
+    override fun I.save(): I = repository.save(this.map())
+    override fun List<I>.save(): Iterable<I> = repository.saveAll(map {
         it.map()
     })
 
-    override fun List<I>.deleteAll() {
-        with(mainRepository) {
+    override fun List<I>.deleteAll() =
+        with(repository) {
             deleteAll(map {
                 it.map()
             })
         }
-    }
 
-    override fun List<ID>.deleteAllByIds() = forEach {
-        mainRepository.deleteById(it)
-    }
+    override fun List<ID>.deleteAllByIds() =
+        forEach {
+            repository.deleteById(it)
+        }
 
-    override val storeQuery: StoreQuery<ID, I> = StoreQueryImpl(mainRepository)
+    override val storeQuery: StoreQuery<ID, I> = StoreQueryImpl(repository)
 
 }
