@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono
  * Created At 12, **Fri February, 2021**
  * Project *ktx-radix* [Quee.IO]
  */
-abstract class ValidationReactiveMonoCommandUseCase<RQ : UseCaseRequest, RS : UseCaseResponse>(
+abstract class ValidationReactiveMonoFunctionalUseCase<RQ : UseCaseRequest, RS : UseCaseResponse>(
     private val validator: UseCaseValidator = DefaultUseCaseValidator.create()
 ) : ReactiveMonoFunctionalUseCase<RQ, RS>, Actionable<RQ, RS> {
     final override fun RQ.before() = validator validate this
