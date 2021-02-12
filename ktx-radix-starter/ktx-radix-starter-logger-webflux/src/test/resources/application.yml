@@ -1,0 +1,12 @@
+ktx:
+  logger:
+    formatter: json
+    logger-name: io.quee.ktx.radix.starter.logger.webflux.SampleFluxApp
+    masked-keys:
+      - userUuid
+      - user-agent
+      - accept
+logging:
+  level:
+    io:
+      quee: trace

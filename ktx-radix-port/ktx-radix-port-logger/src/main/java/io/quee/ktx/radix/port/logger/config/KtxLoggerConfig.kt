@@ -1,9 +1,9 @@
 package io.quee.ktx.radix.port.logger.config
 
+import org.slf4j.event.Level
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding
 import org.springframework.boot.context.properties.bind.DefaultValue
-import org.zalando.logbook.DefaultHttpLogWriter
 
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
@@ -13,9 +13,17 @@ import org.zalando.logbook.DefaultHttpLogWriter
 @ConstructorBinding
 @ConfigurationProperties(prefix = "ktx.logger")
 data class KtxLoggerConfig(
-        @DefaultValue("DEFAULT") val formatter: FormatterType,
-        @DefaultValue("########") val mask: String,
-        val maskedKeys: Set<String> = HashSet(),
-        val loggerName: Class<*> = KtxLoggerConfig::class.java,
-        @DefaultValue("DEBUG") val level: DefaultHttpLogWriter.Level
-)
+    @DefaultValue("DEFAULT") val formatter: FormatterType,
+    @DefaultValue("########") val mask: String,
+    @Deprecated("Use ignored.fields instead")
+    val maskedKeys: Set<String> = HashSet(),
+    val loggerName: Class<*> = KtxLoggerConfig::class.java,
+    @DefaultValue("DEBUG") val level: Level,
+    val ignored: IgnoredConfig = IgnoredConfig(fields = maskedKeys)
+) {
+    @ConstructorBinding
+    data class IgnoredConfig(
+        val urls: Set<String> = HashSet(),
+        val fields: Set<String> = HashSet(),
+    )
+}

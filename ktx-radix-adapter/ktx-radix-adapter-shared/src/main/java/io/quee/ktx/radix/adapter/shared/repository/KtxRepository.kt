@@ -1,4 +1,4 @@
-package io.quee.ktx.radix.adapter.shared.respository
+package io.quee.ktx.radix.adapter.shared.repository
 
 import io.quee.ktx.radix.develop.identity.Identity
 import org.springframework.data.repository.NoRepositoryBean

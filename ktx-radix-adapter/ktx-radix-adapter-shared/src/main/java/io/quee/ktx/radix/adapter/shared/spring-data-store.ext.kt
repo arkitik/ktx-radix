@@ -13,4 +13,4 @@ import java.io.Serializable
  */
 
 infix fun <ID : Serializable, I : Identity<ID>, E : I> StoreQuery<ID, I>.paged(data: Page<E>): PageData<I> =
-        PageData(data.content, data.numberOfElements, data.totalElements, data.totalPages, data.number, data.size)
+    PageData(data.content, data.numberOfElements, data.totalElements, data.totalPages, data.number, data.size)

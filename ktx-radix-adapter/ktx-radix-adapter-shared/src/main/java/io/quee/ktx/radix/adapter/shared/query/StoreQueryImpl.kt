@@ -1,7 +1,7 @@
 package io.quee.ktx.radix.adapter.shared.query
 
 import io.quee.ktx.radix.adapter.shared.paged
-import io.quee.ktx.radix.adapter.shared.respository.KtxRepository
+import io.quee.ktx.radix.adapter.shared.repository.KtxRepository
 import io.quee.ktx.radix.develop.identity.Identity
 import io.quee.ktx.radix.develop.store.query.PageData
 import io.quee.ktx.radix.develop.store.query.StoreQuery

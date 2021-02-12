@@ -17,14 +17,19 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * Project *ktx-radix* [Quee.IO]
  */
 class DefaultTrackerConfigProvider(
-        trackerConfig: TrackerConfig,
-        applicationContext: ApplicationContext
+    trackerConfig: TrackerConfig,
+    applicationContext: ApplicationContext
 ) : TrackerConfigProvider {
     private val trackedPaths: MutableList<TrackedPath> = ArrayList(trackerConfig.tracked)
     override fun paths() = trackedPaths
 
     init {
-        val beansOfTypeIncludingAncestors = BeanFactoryUtils.beansOfTypeIncludingAncestors(applicationContext, RequestMappingHandlerMapping::class.java, true, true)
+        val beansOfTypeIncludingAncestors = BeanFactoryUtils.beansOfTypeIncludingAncestors(
+            applicationContext,
+            RequestMappingHandlerMapping::class.java,
+            true,
+            true
+        )
         val requestMappingHandlerMapping = beansOfTypeIncludingAncestors["requestMappingHandlerMapping"]
         val handlerMethods = requestMappingHandlerMapping?.handlerMethods
         handlerMethods?.filter { entry ->
@@ -32,12 +37,12 @@ class DefaultTrackerConfigProvider(
                 it.annotationClass.annotations.filterIsInstance<TrackedMapping>().isNotEmpty()
             } || entry.value.beanType.isAnnotationPresent(TrackedRestController::class.java)
         }?.map { entry ->
-            entry.key.patternsCondition
-                    .patterns  toTrackedPaths {
-                        entry.key.methodsCondition.methods.map {
-                            HttpMethod.resolve(it.name)!!
-                        }
-                    }
+            entry.key.patternsCondition!!
+                .patterns toTrackedPaths {
+                entry.key.methodsCondition.methods.map {
+                    HttpMethod.resolve(it.name)!!
+                }
+            }
         }?.forEach { trackedPaths.addAll(it) }
     }
 }

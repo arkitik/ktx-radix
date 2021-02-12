@@ -7,7 +7,7 @@
     <groupId>io.quee.ktx.radix</groupId>
     <artifactId>ktx-radix</artifactId>
     <packaging>pom</packaging>
-    <version>v1.0.5-RELEASE</version>
+    <version>v1.1.0-RELEASE</version>
     <modules>
         <module>ktx-radix-port</module>
         <module>ktx-radix-adapter</module>
@@ -47,9 +47,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <kotlin.version>1.4.10</kotlin.version>
+        <kotlin.version>1.4.30</kotlin.version>
         <dokka.version>0.10.1</dokka.version>
-        <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
+        <spring-boot.version>2.4.2</spring-boot.version>
+        <logbook.version>2.4.2</logbook.version>
     </properties>
     <dependencies>
         <dependency>
@@ -97,7 +98,7 @@
             <dependency>
                 <groupId>org.zalando</groupId>
                 <artifactId>logbook-bom</artifactId>
-                <version>1.13.0</version>
+                <version>${logbook.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

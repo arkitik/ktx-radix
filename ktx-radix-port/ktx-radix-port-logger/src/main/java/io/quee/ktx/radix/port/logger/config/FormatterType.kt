@@ -1,6 +1,10 @@
 package io.quee.ktx.radix.port.logger.config
 
-import org.zalando.logbook.*
+import org.zalando.logbook.CurlHttpLogFormatter
+import org.zalando.logbook.DefaultHttpLogFormatter
+import org.zalando.logbook.HttpLogFormatter
+import org.zalando.logbook.SplunkHttpLogFormatter
+import org.zalando.logbook.json.JsonHttpLogFormatter
 
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)

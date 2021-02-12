@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ktx-radix</artifactId>
         <groupId>io.quee.ktx.radix</groupId>
-        <version>v1.0.5-RELEASE</version>
+        <version>v1.1.0-RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -14,7 +14,6 @@
     <modules>
         <module>ktx-radix-starter-logger</module>
         <module>ktx-radix-starter-tracker</module>
+        <module>ktx-radix-starter-logger-webflux</module>
     </modules>
-
-
 </project>

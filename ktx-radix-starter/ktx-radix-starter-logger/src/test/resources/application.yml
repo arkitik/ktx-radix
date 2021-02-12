@@ -1,0 +1,14 @@
+ktx:
+  logger:
+    formatter: json
+    logger-name: io.quee.ktx.radix.starter.logger.SampleApp
+    masked-keys:
+      - userUuid
+      - user-agent
+      - accept
+logging:
+  level:
+    io:
+      quee: debug
+server:
+  port: 8081
