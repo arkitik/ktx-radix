@@ -10,3 +10,5 @@ logging:
   level:
     io:
       quee: trace
+server:
+  port: 8999

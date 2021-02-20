@@ -1,11 +1,11 @@
-package io.quee.ktx.radix.usecase.reactive.functional
+package io.quee.ktx.radix.develop.usecase.validation.command
 
 import io.quee.ktx.radix.develop.usecase.actionable.Actionable
 import io.quee.ktx.radix.develop.usecase.model.UseCaseRequest
-import io.quee.ktx.radix.develop.usecase.model.UseCaseResponse
 import io.quee.ktx.radix.develop.usecase.validation.func.DefaultUseCaseValidator
 import io.quee.ktx.radix.develop.usecase.validation.func.UseCaseValidator
 import io.quee.ktx.radix.develop.usecase.validation.validate
+import io.quee.ktx.radix.usecase.reactive.command.ReactiveMonoCommandUseCase
 import reactor.core.publisher.Mono
 
 /**
@@ -13,19 +13,19 @@ import reactor.core.publisher.Mono
  * Created At 12, **Fri February, 2021**
  * Project *ktx-radix* [Quee.IO]
  */
-abstract class ValidationReactiveMonoFunctionalUseCase<RQ : UseCaseRequest, RS : UseCaseResponse>(
+abstract class ValidationReactiveMonoCommandUseCase<RQ : UseCaseRequest>(
     private val validator: UseCaseValidator = DefaultUseCaseValidator.create()
-) : ReactiveMonoFunctionalUseCase<RQ, RS>, Actionable<RQ, RS> {
+) : ReactiveMonoCommandUseCase<RQ>, Actionable<RQ, Unit> {
     final override fun RQ.before() = validator validate this
 
-    override fun RQ.after(response: RS) = Unit
+    override fun RQ.after(response: Unit) = Unit
 
-    final override fun Mono<RQ>.process() =
+    final override fun Mono<RQ>.execute() =
         with(this) {
             this.map {
                 it.apply { before() }
-            }.doProcess()
+            }.doExecute()
         }
 
-    abstract fun Mono<RQ>.doProcess(): Mono<RS>
+    abstract fun Mono<RQ>.doExecute()
 }

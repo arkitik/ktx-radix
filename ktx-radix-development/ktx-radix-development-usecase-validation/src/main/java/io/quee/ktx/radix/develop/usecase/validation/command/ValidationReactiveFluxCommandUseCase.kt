@@ -1,10 +1,11 @@
-package io.quee.ktx.radix.usecase.reactive.command
+package io.quee.ktx.radix.develop.usecase.validation.command
 
 import io.quee.ktx.radix.develop.usecase.actionable.Actionable
 import io.quee.ktx.radix.develop.usecase.model.UseCaseRequest
 import io.quee.ktx.radix.develop.usecase.validation.func.DefaultUseCaseValidator
 import io.quee.ktx.radix.develop.usecase.validation.func.UseCaseValidator
 import io.quee.ktx.radix.develop.usecase.validation.validate
+import io.quee.ktx.radix.usecase.reactive.command.ReactiveFluxCommandUseCase
 import reactor.core.publisher.Flux
 
 /**

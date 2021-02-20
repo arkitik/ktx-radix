@@ -10,10 +10,10 @@ import io.quee.ktx.radix.develop.usecase.model.UseCaseRequest
  */
 abstract class ActionableCommandUseCase<RQ : UseCaseRequest> : CommandUseCase<RQ>, Actionable<RQ, Unit> {
     final override fun RQ.execute() =
-            with(this) {
-                before()
-                after(doExecute())
-            }
+        with(this) {
+            before()
+            after(doExecute())
+        }
 
     abstract fun RQ.doExecute()
 }
