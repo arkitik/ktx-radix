@@ -6,7 +6,5 @@ package io.quee.ktx.radix.develop.usecase.model
  * Project *ktx-radix* [Quee.IO]
  */
 interface UseCaseRequest {
-    companion object {
-        val NOP: UseCaseRequest = object : UseCaseRequest {}
-    }
+    object NOP : UseCaseRequest
 }

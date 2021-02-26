@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ktx-radix-development-shared</artifactId>
-
+    <artifactId>ktx-radix-development-operation</artifactId>
 
 </project>

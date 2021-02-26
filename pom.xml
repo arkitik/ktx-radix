@@ -7,7 +7,7 @@
     <groupId>io.quee.ktx.radix</groupId>
     <artifactId>ktx-radix</artifactId>
     <packaging>pom</packaging>
-    <version>v1.1.3-RELEASE</version>
+    <version>v1.2.0-RELEASE</version>
     <modules>
         <module>ktx-radix-port</module>
         <module>ktx-radix-adapter</module>

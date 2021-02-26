@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ktx-radix</artifactId>
         <groupId>io.quee.ktx.radix</groupId>
-        <version>v1.1.3-RELEASE</version>
+        <version>v1.2.0-RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
