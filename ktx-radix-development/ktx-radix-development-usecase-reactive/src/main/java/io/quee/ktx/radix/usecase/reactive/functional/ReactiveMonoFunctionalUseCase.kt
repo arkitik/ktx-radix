@@ -1,5 +1,8 @@
 package io.quee.ktx.radix.usecase.reactive.functional
 
+import io.quee.ktx.radix.develop.usecase.FunctionalUseCase
+import io.quee.ktx.radix.develop.usecase.adapter.RequestAdapter
+import io.quee.ktx.radix.develop.usecase.adapter.ResponseAdapter
 import io.quee.ktx.radix.develop.usecase.model.UseCaseRequest
 import io.quee.ktx.radix.develop.usecase.model.UseCaseResponse
 import reactor.core.publisher.Mono
@@ -9,6 +12,5 @@ import reactor.core.publisher.Mono
  * Created At 12, **Fri February, 2021**
  * Project *ktx-radix* [Quee.IO]
  */
-interface ReactiveMonoFunctionalUseCase<RQ : UseCaseRequest, RS : UseCaseResponse> {
-    fun Mono<RQ>.process(): Mono<RS>
-}
+interface ReactiveMonoFunctionalUseCase<RQ : UseCaseRequest, RS : UseCaseResponse> :
+    FunctionalUseCase<RequestAdapter<Mono<RQ>>, ResponseAdapter<Mono<RS>>>

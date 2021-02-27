@@ -9,6 +9,4 @@ import io.quee.ktx.radix.develop.usecase.validation.func.UseCaseValidator
  * Project *ktx-radix* [Quee.IO]
  */
 
-infix fun <RQ : UseCaseRequest> UseCaseValidator.validate(request: RQ) {
-    request.validate()
-}
+infix fun <RQ : UseCaseRequest> UseCaseValidator.validate(request: RQ) = request.validate()

@@ -1,6 +1,8 @@
 package io.quee.ktx.radix.develop.usecase.validation.functional
 
 import io.quee.ktx.radix.develop.usecase.actionable.Actionable
+import io.quee.ktx.radix.develop.usecase.adapter.RequestAdapter
+import io.quee.ktx.radix.develop.usecase.adapter.toResponse
 import io.quee.ktx.radix.develop.usecase.model.UseCaseRequest
 import io.quee.ktx.radix.develop.usecase.model.UseCaseResponse
 import io.quee.ktx.radix.develop.usecase.validation.func.DefaultUseCaseValidator
@@ -15,17 +17,18 @@ import reactor.core.publisher.Flux
  * Project *ktx-radix* [Quee.IO]
  */
 abstract class ValidationReactiveFluxFunctionalUseCase<RQ : UseCaseRequest, RS : UseCaseResponse>(
-    private val validator: UseCaseValidator = DefaultUseCaseValidator.create()
+    private val validator: UseCaseValidator = DefaultUseCaseValidator.create(),
 ) : ReactiveFluxFunctionalUseCase<RQ, RS>, Actionable<RQ, RS> {
     final override fun RQ.before() = validator validate this
 
     override fun RQ.after(response: RS) = Unit
-
-    override fun Flux<RQ>.process() =
-        with(this) {
-            this.map {
-                it.apply { before() }
-            }.doProcess()
+    override fun RequestAdapter<Flux<RQ>>.process() =
+        with(request) {
+            toResponse {
+                map {
+                    it.apply { before() }
+                }.doProcess()
+            }
         }
 
     abstract fun Flux<RQ>.doProcess(): Flux<RS>

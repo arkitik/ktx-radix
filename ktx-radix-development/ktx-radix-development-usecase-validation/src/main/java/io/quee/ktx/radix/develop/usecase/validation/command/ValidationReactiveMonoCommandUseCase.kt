@@ -1,6 +1,7 @@
 package io.quee.ktx.radix.develop.usecase.validation.command
 
 import io.quee.ktx.radix.develop.usecase.actionable.Actionable
+import io.quee.ktx.radix.develop.usecase.adapter.RequestAdapter
 import io.quee.ktx.radix.develop.usecase.model.UseCaseRequest
 import io.quee.ktx.radix.develop.usecase.validation.func.DefaultUseCaseValidator
 import io.quee.ktx.radix.develop.usecase.validation.func.UseCaseValidator
@@ -14,14 +15,13 @@ import reactor.core.publisher.Mono
  * Project *ktx-radix* [Quee.IO]
  */
 abstract class ValidationReactiveMonoCommandUseCase<RQ : UseCaseRequest>(
-    private val validator: UseCaseValidator = DefaultUseCaseValidator.create()
+    private val validator: UseCaseValidator = DefaultUseCaseValidator.create(),
 ) : ReactiveMonoCommandUseCase<RQ>, Actionable<RQ, Unit> {
     final override fun RQ.before() = validator validate this
 
     override fun RQ.after(response: Unit) = Unit
-
-    final override fun Mono<RQ>.execute() =
-        with(this) {
+    override fun RequestAdapter<Mono<RQ>>.execute() =
+        with(request) {
             this.map {
                 it.apply { before() }
             }.doExecute()

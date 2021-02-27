@@ -1,5 +1,6 @@
 package io.quee.ktx.radix.usecase.reactive.functional
 
+import io.quee.ktx.radix.develop.usecase.adapter.adapterProcess
 import io.quee.ktx.radix.develop.usecase.model.UseCaseRequest
 import io.quee.ktx.radix.develop.usecase.model.UseCaseResponse
 import reactor.kotlin.core.publisher.toFlux
@@ -15,7 +16,7 @@ infix fun <RQ : UseCaseRequest, RS : UseCaseResponse> ReactiveFluxFunctionalUseC
     this process listOf(request)
 
 infix fun <RQ : UseCaseRequest, RS : UseCaseResponse> ReactiveFluxFunctionalUseCase<RQ, RS>.process(request: Iterable<RQ>) =
-    request.toFlux().process()
+    adapterProcess(request.toFlux())
 
 infix fun <RQ : UseCaseRequest, RS : UseCaseResponse> ReactiveMonoFunctionalUseCase<RQ, RS>.process(request: RQ) =
-    request.toMono().process()
+    adapterProcess(request.toMono())

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ktx-radix-development</artifactId>
         <groupId>io.quee.ktx.radix</groupId>
-        <version>v1.2.0-RELEASE</version>
+        <version>v1.2.1-RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
-            <artifactId>ktx-radix-development-usecase</artifactId>
+            <artifactId>ktx-radix-development-usecase-adapter</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
