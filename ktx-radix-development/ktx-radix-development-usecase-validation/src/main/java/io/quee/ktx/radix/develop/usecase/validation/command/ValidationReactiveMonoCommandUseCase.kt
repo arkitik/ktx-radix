@@ -20,7 +20,7 @@ abstract class ValidationReactiveMonoCommandUseCase<RQ : UseCaseRequest>(
     final override fun RQ.before() = validator validate this
 
     override fun RQ.after(response: Unit) = Unit
-    override fun RequestAdapter<Mono<RQ>>.execute() =
+    final override fun RequestAdapter<Mono<RQ>>.execute() =
         with(request) {
             this.map {
                 it.apply { before() }

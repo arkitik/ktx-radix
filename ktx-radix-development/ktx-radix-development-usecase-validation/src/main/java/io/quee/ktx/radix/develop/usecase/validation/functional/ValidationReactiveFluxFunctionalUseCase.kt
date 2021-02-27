@@ -22,7 +22,7 @@ abstract class ValidationReactiveFluxFunctionalUseCase<RQ : UseCaseRequest, RS :
     final override fun RQ.before() = validator validate this
 
     override fun RQ.after(response: RS) = Unit
-    override fun RequestAdapter<Flux<RQ>>.process() =
+    final override fun RequestAdapter<Flux<RQ>>.process() =
         with(request) {
             toResponse {
                 map {
