@@ -17,19 +17,20 @@ interface Operator<RQ, RS> {
     fun RQ.operate(response: RS)
 }
 
-infix fun <RQ, RS> Operation<RQ, RS>.operationBuilder(
+infix fun <RQ, RS> Operation<RQ, RS>.runOperation(request: RQ) = request.operate()
+
+fun <RQ, RS> operationBuilder(
     builder: OperationBuilder<RQ, RS>.() -> Unit,
 ): Operation<RQ, RS> =
-    OperationBuilder(this)
+    OperationBuilder<RQ, RS>()
         .apply {
             builder()
         }
 
-class OperationBuilder<RQ, RS>(
-    private val mainOperation: Operation<RQ, RS>,
-) : Operation<RQ, RS> {
+class OperationBuilder<RQ, RS> : Operation<RQ, RS> {
     private val roles: MutableList<OperationRole<RQ, Unit>> = mutableListOf()
     private val afterOperators: MutableList<Operator<RQ, RS>> = mutableListOf()
+    private lateinit var mainOperation: Operation<RQ, RS>
 
     private fun RQ.before() =
         roles.forEach { it.run { operateRole() } }
@@ -44,6 +45,10 @@ class OperationBuilder<RQ, RS>(
 
     infix fun after(operator: Operator<RQ, RS>) {
         this.afterOperators.add(operator)
+    }
+
+    infix fun mainOperation(operation: Operation<RQ, RS>) {
+        this.mainOperation = operation
     }
 
     infix fun after(operator: RQ.(RS) -> Unit) {
