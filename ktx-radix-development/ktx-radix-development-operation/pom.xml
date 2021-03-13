@@ -5,10 +5,20 @@
     <parent>
         <artifactId>ktx-radix-development</artifactId>
         <groupId>io.quee.ktx.radix</groupId>
-        <version>v1.2.3-RELEASE</version>
+        <version>v1.2.4-RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ktx-radix-development-operation</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>ktx-radix-development-shared</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
 </project>

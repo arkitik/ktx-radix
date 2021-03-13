@@ -17,8 +17,6 @@ interface Operator<RQ, RS> {
     fun RQ.operate(response: RS)
 }
 
-infix fun <RQ, RS> Operation<RQ, RS>.runOperation(request: RQ) = request.operate()
-
 fun <RQ, RS> operationBuilder(
     builder: OperationBuilder<RQ, RS>.() -> Unit,
 ): Operation<RQ, RS> =
@@ -49,6 +47,12 @@ class OperationBuilder<RQ, RS> : Operation<RQ, RS> {
 
     infix fun mainOperation(operation: Operation<RQ, RS>) {
         this.mainOperation = operation
+    }
+
+    infix fun mainOperation(operation: RQ.() -> RS) {
+        this.mainOperation = object : Operation<RQ, RS> {
+            override fun RQ.operate() = operation()
+        }
     }
 
     infix fun after(operator: RQ.(RS) -> Unit) {
