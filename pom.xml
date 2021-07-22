@@ -7,7 +7,7 @@
     <groupId>io.quee.ktx.radix</groupId>
     <artifactId>ktx-radix</artifactId>
     <packaging>pom</packaging>
-    <version>v1.2.4-RELEASE</version>
+    <version>v1.2.5</version>
     <modules>
         <module>ktx-radix-port</module>
         <module>ktx-radix-adapter</module>
@@ -47,9 +47,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <kotlin.version>1.4.30</kotlin.version>
-        <dokka.version>0.10.1</dokka.version>
-        <spring-boot.version>2.4.2</spring-boot.version>
+        <kotlin.version>1.5.21</kotlin.version>
+        <dokka.version>1.5.0</dokka.version>
+        <spring-boot.version>2.5.2</spring-boot.version>
         <logbook.version>2.4.2</logbook.version>
     </properties>
     <dependencies>
@@ -228,7 +228,7 @@
             <plugin>
                 <groupId>org.jetbrains.dokka</groupId>
                 <artifactId>dokka-maven-plugin</artifactId>
-                <version>1.4.10.2</version>
+                <version>${dokka.version}</version>
                 <executions>
                     <execution>
                         <phase>pre-site</phase>

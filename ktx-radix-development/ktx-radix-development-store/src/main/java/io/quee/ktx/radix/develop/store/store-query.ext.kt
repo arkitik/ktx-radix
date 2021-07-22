@@ -16,6 +16,8 @@ infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.find(id: ID) =
 infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.find(id: () -> ID) =
         find(id())
 
+infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.notExists(id: ID) =
+        !exist(id)
 infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.exists(id: ID) =
         exist(id)
 
