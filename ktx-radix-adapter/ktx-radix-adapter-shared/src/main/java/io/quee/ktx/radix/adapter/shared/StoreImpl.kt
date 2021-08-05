@@ -10,10 +10,10 @@ import java.io.Serializable
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 abstract class StoreImpl<ID : Serializable, I : Identity<ID>, E : I>(
-    private val repository: KtxRepository<ID, E>
+    private val repository: KtxRepository<ID, E>,
 ) : Store<ID, I> {
     override fun ID.delete() = repository.deleteById(this)
     override fun I.delete() = repository.delete(map())

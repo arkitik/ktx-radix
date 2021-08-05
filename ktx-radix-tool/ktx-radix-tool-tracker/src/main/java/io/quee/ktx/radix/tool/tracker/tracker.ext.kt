@@ -7,14 +7,15 @@ import org.springframework.http.HttpMethod
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 
-infix fun String.toTrackedPath(methods: Iterable<HttpMethod>): TrackedPath = TrackerConfig.TrackedPathImpl(this, methods.toSet())
+infix fun String.toTrackedPath(methods: Iterable<HttpMethod>): TrackedPath =
+    TrackerConfig.TrackedPathImpl(this, methods.toSet())
 
 infix fun Collection<String>.toTrackedPaths(methods: Iterable<HttpMethod>) = map {
     it.toTrackedPath(methods)
 }
 
 infix fun Collection<String>.toTrackedPaths(provider: () -> List<HttpMethod>) =
-        toTrackedPaths(provider())
+    toTrackedPaths(provider())

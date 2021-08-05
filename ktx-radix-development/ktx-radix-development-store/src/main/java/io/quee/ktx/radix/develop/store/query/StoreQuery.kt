@@ -6,7 +6,7 @@ import java.io.Serializable
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 29, **Thu Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 interface StoreQuery<ID : Serializable, I : Identity<ID>> {
     fun find(uuid: ID): I?
@@ -17,10 +17,10 @@ interface StoreQuery<ID : Serializable, I : Identity<ID>> {
 }
 
 data class PageData<T>(
-        val content: Iterable<T>,
-        val numberOfElements: Int,
-        val totalElements: Long,
-        val totalPages: Int,
-        val currentPage: Int,
-        val currentPageSize: Int
+    val content: Iterable<T>,
+    val numberOfElements: Int,
+    val totalElements: Long,
+    val totalPages: Int,
+    val currentPage: Int,
+    val currentPageSize: Int,
 )

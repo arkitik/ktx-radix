@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.bind.DefaultValue
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 @ConstructorBinding
 @ConfigurationProperties(prefix = "ktx.logger")
@@ -19,7 +19,7 @@ data class KtxLoggerConfig(
     val maskedKeys: Set<String> = HashSet(),
     val loggerName: Class<*> = KtxLoggerConfig::class.java,
     @DefaultValue("DEBUG") val level: Level,
-    val ignored: IgnoredConfig = IgnoredConfig(fields = maskedKeys)
+    val ignored: IgnoredConfig = IgnoredConfig(fields = maskedKeys),
 ) {
     @ConstructorBinding
     data class IgnoredConfig(

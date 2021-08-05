@@ -1,6 +1,5 @@
 package io.quee.ktx.radix.tool.test.replacer
 
-import io.quee.ktx.radix.tool.test.dto.TestCase
 import io.quee.ktx.radix.tool.test.dto.TestClassData
 import io.quee.ktx.radix.tool.test.dto.TestScenario
 import io.quee.ktx.radix.tool.test.function.DataParser
@@ -13,14 +12,15 @@ import org.iban4j.Iban
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import java.util.*
 
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 class DefaultRegexReplacer(
-        private val dataParser: DataParser
+    private val dataParser: DataParser,
 ) : RegexReplacer {
 
     override fun String.replace(): TestClassData {
@@ -32,7 +32,7 @@ class DefaultRegexReplacer(
                 val addedAmount = it.groupValues[2].toInt()
                 val addedType = it.groupValues[3]
                 TIMESTAMP_FORMATTER.format(
-                        DateAmountType.localDateTime(isPlus, addedType, addedAmount)
+                    DateAmountType.localDateTime(isPlus, addedType, addedAmount)
                 )
             }.replace(regex = RANDOM_REGEX) {
                 val randomDataType = RandomDataType.valueOf(it.groupValues[1])
@@ -42,22 +42,22 @@ class DefaultRegexReplacer(
             replaced.parse(TestClassData::class)
         }
         val scenarios: List<TestScenario> = updatedClassData.scenarios
-                .map {
-                    val testCasesMaps = it.cases.map { test ->
-                        test.toMap()
-                    }
-                    val updatedTestCasesMaps = testCasesMaps.mapIndexed { index, map ->
-                        replaceRegex(map, testCasesMaps)
-                    }
-                    TestScenario(it.name, updatedTestCasesMaps.map { map ->
-                        map.toObject()
-                    })
+            .map {
+                val testCasesMaps = it.cases.map { test ->
+                    test.toMap()
                 }
+                val updatedTestCasesMaps = testCasesMaps.map { map ->
+                    replaceRegex(map, testCasesMaps)
+                }
+                TestScenario(it.name, updatedTestCasesMaps.map { map ->
+                    map.toObject()
+                })
+            }
         return TestClassData(scenarios)
     }
 
     private fun replaceRegex(element: Map<String, Any>, testCasesMaps: List<Map<String, Any>>): HashMap<String, Any> {
-        val newElement = HashMap<String, Any>(element)
+        val newElement = HashMap(element)
         for (i in 0..3) {
             newElement.forEach {
                 newElement[it.key] = resolveValue(it, newElement, testCasesMaps)
@@ -67,12 +67,20 @@ class DefaultRegexReplacer(
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun resolveValue(entry: Map.Entry<String, Any>, selfElementValue: HashMap<String, Any>, testCasesMaps: List<Map<String, Any>>): Any {
+    private fun resolveValue(
+        entry: Map.Entry<String, Any>,
+        selfElementValue: HashMap<String, Any>,
+        testCasesMaps: List<Map<String, Any>>,
+    ): Any {
         return valueReplacer(entry.value, selfElementValue, testCasesMaps)
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun valueReplacer(value: Any, selfElementValue: HashMap<String, Any>, testCasesMaps: List<Map<String, Any>>): Any {
+    private fun valueReplacer(
+        value: Any,
+        selfElementValue: HashMap<String, Any>,
+        testCasesMaps: List<Map<String, Any>>,
+    ): Any {
         return when (value) {
             is Map<*, *> -> {
                 val newValue = HashMap<String, Any?>()
@@ -127,11 +135,11 @@ class DefaultRegexReplacer(
         val bankCode = it.groupValues[2]
         val accountNumber = it.groupValues[3]
         return Iban.Builder()
-                .accountNumber(accountNumber)
-                .bankCode(bankCode)
-                .countryCode(CountryCode.getByCode(countryCode))
-                .build()
-                .toString()
+            .accountNumber(accountNumber)
+            .bankCode(bankCode)
+            .countryCode(CountryCode.getByCode(countryCode))
+            .build()
+            .toString()
     }
 
     private fun ibanReferenceReplacer(it: MatchResult, selfElementValue: HashMap<String, Any>): CharSequence {
@@ -144,11 +152,11 @@ class DefaultRegexReplacer(
         } else {
             if (pathValue.matches("([0-9]+)".toRegex()))
                 Iban.Builder()
-                        .accountNumber(pathValue)
-                        .bankCode(bankCode)
-                        .countryCode(CountryCode.getByCode(countryCode))
-                        .build()
-                        .toString()
+                    .accountNumber(pathValue)
+                    .bankCode(bankCode)
+                    .countryCode(CountryCode.getByCode(countryCode))
+                    .build()
+                    .toString()
             else
                 it.value
         }
@@ -157,13 +165,13 @@ class DefaultRegexReplacer(
     private fun pathValueResolver(pathValue: String, map: Map<String, Any>, delimiter: String = "."): Any? {
         var value: Any? = map
         pathValue.split(delimiter)
-                .forEach {
-                    value = if (it.toIntOrNull() != null) {
-                        (value as List<*>)[it.toInt()]
-                    } else {
-                        (value as Map<*, *>)[it]
-                    }
+            .forEach {
+                value = if (it.toIntOrNull() != null) {
+                    (value as List<*>)[it.toInt()]
+                } else {
+                    (value as Map<*, *>)[it]
                 }
+            }
         return value
     }
 
@@ -185,30 +193,30 @@ class DefaultRegexReplacer(
 private enum class RandomDataType(val generator: Int.() -> String) {
     NUMBER({
         RandomStringUtils.random(
-                this,
-                false,
-                true
+            this,
+            false,
+            true
         )
     }),
     CHARS({
         RandomStringUtils.random(
-                this,
-                true,
-                false
+            this,
+            true,
+            false
         )
     }),
     CAPS({
         RandomStringUtils.random(
-                this,
-                true,
-                false
-        ).toUpperCase()
+            this,
+            true,
+            false
+        ).uppercase()
     }),
     ALL({
         RandomStringUtils.random(
-                this,
-                true,
-                true
+            this,
+            true,
+            true
         )
     });
 }

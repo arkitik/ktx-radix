@@ -5,11 +5,11 @@ import io.quee.ktx.radix.tool.test.regex.KtxRegex
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 open class DefaultKtxRegex(
-        private val regexValue: String,
-        override val preProcess: Boolean
+    private val regexValue: String,
+    override val preProcess: Boolean,
 ) : KtxRegex {
     override val regex = regexValue.toRegex()
 

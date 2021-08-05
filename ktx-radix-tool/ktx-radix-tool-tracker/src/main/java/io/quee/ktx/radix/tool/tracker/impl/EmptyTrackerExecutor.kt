@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletResponse
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 class EmptyTrackerExecutor : TrackerExecutor {
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
     override fun execute(request: HttpServletRequest, response: HttpServletResponse) {
         logger.info(
-                "Request: {}, Response: {}",
-                StreamUtils.copyToString(ContentCachingRequestWrapper(request).inputStream, StandardCharsets.UTF_8),
-                StreamUtils.copyToString(ContentCachingResponseWrapper(response).contentInputStream, StandardCharsets.UTF_8)
+            "Request: {}, Response: {}",
+            StreamUtils.copyToString(ContentCachingRequestWrapper(request).inputStream, StandardCharsets.UTF_8),
+            StreamUtils.copyToString(ContentCachingResponseWrapper(response).contentInputStream, StandardCharsets.UTF_8)
         )
     }
 }

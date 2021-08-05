@@ -8,7 +8,7 @@ import io.quee.ktx.radix.develop.usecase.model.UseCaseResponse
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 07, **Sat Nov, 2020**
- * Project **ktx-radix** [Quee.IO](https://quee.io)
+ * Project **ktx-radix** [https://quee.io](https://quee.io)
  */
 infix fun <RQ, RS> FunctionalUseCase<RequestAdapter<RQ>, ResponseAdapter<RS>>.adapterProcess(request: RQ) =
     (this process RequestAdapter(request)).response

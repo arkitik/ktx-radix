@@ -7,7 +7,7 @@ import io.quee.ktx.radix.develop.usecase.model.UseCaseResponse
 /**
  * Created By [*Ibrahim Al-Tamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 28, **Sun February, 2021**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 fun <RQ : UseCaseRequest, RS : UseCaseResponse> FunctionalUseCase<RQ, RS>.toOperation(): Operation<RQ, RS> =
     UseCaseOperation {

@@ -9,10 +9,24 @@ import javax.validation.Validation
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 29, **Thu Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
+@Deprecated(
+    message = "To be removed in v2.0.0, replaced by module ktx-radix-development-operation-ext",
+    replaceWith = ReplaceWith(
+        expression = "DefaultJavaXValidator",
+        "io.quee.ktx.radix.develop.operation.ext.DefaultJavaXValidator"
+    ),
+)
 object DefaultJavaXValidator : JavaXValidator()
 
+@Deprecated(
+    message = "To be removed in v2.0.0, replaced by module ktx-radix-development-operation-ext",
+    replaceWith = ReplaceWith(
+        expression = "JavaXValidator",
+        "io.quee.ktx.radix.develop.operation.ext.JavaXValidator"
+    ),
+)
 open class JavaXValidator internal constructor(
     private val validator: javax.validation.Validator = Validation.buildDefaultValidatorFactory().validator,
     private val errorMapper: ErrorMapper = DefaultErrorMapper,
@@ -32,6 +46,13 @@ open class JavaXValidator internal constructor(
     }
 }
 
+@Deprecated(
+    message = "To be removed in v2.0.0, replaced by module ktx-radix-development-operation-ext",
+    replaceWith = ReplaceWith(
+        expression = "DefaultErrorMapper",
+        "io.quee.ktx.radix.develop.operation.ext.DefaultErrorMapper"
+    ),
+)
 object DefaultErrorMapper : ErrorMapper {
     override fun <RQ> ConstraintViolation<RQ>.mapToError(): Error {
         val nodes = propertyPath.toList()
@@ -44,6 +65,13 @@ object DefaultErrorMapper : ErrorMapper {
     }
 }
 
+@Deprecated(
+    message = "To be removed in v2.0.0, replaced by module ktx-radix-development-operation-ext",
+    replaceWith = ReplaceWith(
+        expression = "ErrorMapper",
+        "io.quee.ktx.radix.develop.operation.ext.ErrorMapper"
+    ),
+)
 interface ErrorMapper {
     fun <RQ> ConstraintViolation<RQ>.mapToError(): Error
 }

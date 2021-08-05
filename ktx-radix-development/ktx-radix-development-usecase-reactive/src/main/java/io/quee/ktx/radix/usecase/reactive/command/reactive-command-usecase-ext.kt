@@ -8,7 +8,7 @@ import reactor.kotlin.core.publisher.toMono
 /**
  * Created By [*Ibrahim Al-Tamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 12, **Fri February, 2021**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 infix fun <RQ : UseCaseRequest> ReactiveFluxCommandUseCase<RQ>.execute(request: RQ) =
     adapterExecute(listOf(request).toFlux())

@@ -11,10 +11,10 @@ import java.io.Serializable
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 open class StoreQueryImpl<ID : Serializable, I : Identity<ID>, E : I>(
-    private val repository: KtxRepository<ID, E>
+    private val repository: KtxRepository<ID, E>,
 ) : StoreQuery<ID, I> {
     override fun find(uuid: ID): I? = repository.findByUuid(uuid)
     override fun exist(uuid: ID): Boolean = repository.existsById(uuid)

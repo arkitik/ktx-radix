@@ -10,11 +10,11 @@ import javax.validation.Validator as JavaXValidator
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 29, **Thu Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 open class DefaultUseCaseValidator internal constructor(
-        private val validator: JavaXValidator = Validation.buildDefaultValidatorFactory().validator,
-        private val errorMapper: ErrorMapper = DefaultErrorMapper()
+    private val validator: JavaXValidator = Validation.buildDefaultValidatorFactory().validator,
+    private val errorMapper: ErrorMapper = DefaultErrorMapper(),
 ) : UseCaseValidator {
     override fun <RQ : UseCaseRequest> RQ.validate() {
         validator.run {
@@ -32,11 +32,11 @@ open class DefaultUseCaseValidator internal constructor(
 
     companion object {
         fun create(
-                validator: JavaXValidator = Validation.buildDefaultValidatorFactory().validator,
-                errorMapper: ErrorMapper = DefaultErrorMapper()
+            validator: JavaXValidator = Validation.buildDefaultValidatorFactory().validator,
+            errorMapper: ErrorMapper = DefaultErrorMapper(),
         ): UseCaseValidator {
             return DefaultUseCaseValidator(
-                    validator, errorMapper
+                validator, errorMapper
             )
         }
     }

@@ -9,7 +9,7 @@ import io.quee.ktx.radix.develop.usecase.model.UseCaseResponse
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 28, **Sat November, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 
 typealias UseCaseRole<RQ, RS> = RQ.() -> RS

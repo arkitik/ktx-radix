@@ -8,7 +8,7 @@ import org.zalando.logbook.Precorrelation
 
 class KtxHttpLogWriter(
     private val logger: Logger,
-    private val level: Level
+    private val level: Level,
 ) : HttpLogWriter {
     private val activator: Logger.() -> Boolean = {
         when (level) {

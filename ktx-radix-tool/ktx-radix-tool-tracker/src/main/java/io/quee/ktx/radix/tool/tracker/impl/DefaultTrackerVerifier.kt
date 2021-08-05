@@ -10,22 +10,22 @@ import javax.servlet.http.HttpServletRequestWrapper
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 class DefaultTrackerVerifier(
-        private val trackerConfigProvider: TrackerConfigProvider,
-        private val pathMatcher: PathMatcher
+    private val trackerConfigProvider: TrackerConfigProvider,
+    private val pathMatcher: PathMatcher,
 ) : TrackerVerifier {
     override fun HttpServletRequest.shouldTrack(): Boolean {
         HttpServletRequestWrapper(this)
         return trackerConfigProvider
-                .paths()
-                .filter {
-                    it.methods.contains(HttpMethod.resolve(method))
-                }.any {
-                    with(pathMatcher) {
-                        match(it.path, servletPath) && it.methods == it.methods
-                    }
+            .paths()
+            .filter {
+                it.methods.contains(HttpMethod.resolve(method))
+            }.any {
+                with(pathMatcher) {
+                    match(it.path, servletPath) && it.methods == it.methods
                 }
+            }
     }
 }

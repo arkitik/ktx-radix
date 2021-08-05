@@ -14,11 +14,11 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 class DefaultTrackerConfigProvider(
     trackerConfig: TrackerConfig,
-    applicationContext: ApplicationContext
+    applicationContext: ApplicationContext,
 ) : TrackerConfigProvider {
     private val trackedPaths: MutableList<TrackedPath> = ArrayList(trackerConfig.tracked)
     override fun paths() = trackedPaths

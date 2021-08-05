@@ -19,7 +19,7 @@ import org.springframework.util.PathMatcher
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 @Configuration
 @EnableConfigurationProperties(value = [TrackerConfig::class])
@@ -36,20 +36,20 @@ class TrackerConfiguration {
     @Bean
     @ConditionalOnMissingBean(value = [TrackerConfigProvider::class])
     fun trackerConfigProvider(
-            trackerConfig: TrackerConfig,
-            applicationContext: ApplicationContext
+        trackerConfig: TrackerConfig,
+        applicationContext: ApplicationContext,
     ): TrackerConfigProvider = DefaultTrackerConfigProvider(trackerConfig, applicationContext)
 
     @Bean
     @ConditionalOnMissingBean(value = [TrackerVerifier::class])
     fun trackerVerifier(
-            trackerConfigProvider: TrackerConfigProvider,
-            pathMatcher: PathMatcher
+        trackerConfigProvider: TrackerConfigProvider,
+        pathMatcher: PathMatcher,
     ): TrackerVerifier = DefaultTrackerVerifier(trackerConfigProvider, pathMatcher)
 
     @Bean
     fun trackerRequestFilter(
-            trackerExecutor: TrackerExecutor,
-            trackerVerifier: TrackerVerifier
+        trackerExecutor: TrackerExecutor,
+        trackerVerifier: TrackerVerifier,
     ) = TrackerRequestFilter(trackerExecutor, trackerVerifier)
 }

@@ -8,6 +8,6 @@ import reactor.core.publisher.Flux
 /**
  * Created By [*Ibrahim Al-Tamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 12, **Fri February, 2021**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 interface ReactiveFluxCommandUseCase<RQ : UseCaseRequest> : CommandUseCase<RequestAdapter<Flux<RQ>>>

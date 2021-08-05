@@ -1,0 +1,1 @@
+mvn clean dokka:javadocJar install -X -T 10C nexus-staging:deploy

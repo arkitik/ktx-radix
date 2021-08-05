@@ -7,40 +7,35 @@ import java.io.Serializable
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 
 infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.find(id: ID) =
-        find(id)
+    find(id)
 
 infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.find(id: () -> ID) =
-        find(id())
+    find(id())
 
 infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.notExists(id: ID) =
-        !exist(id)
+    !exist(id)
+
 infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.exists(id: ID) =
-        exist(id)
+    exist(id)
 
 infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.exists(id: () -> ID) =
-        exist(id())
+    exist(id())
 
 infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.all(request: PageableData) =
-        all(request.page, request.size)
+    all(request.page, request.size)
 
 infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.all(request: () -> PageableData) =
-        this all request()
-
-infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.all(nothing: Nothing?) =
-        all()
-
-infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.all(nothing: () -> Nothing) =
-        all()
+    this all request()
 
 infix fun <ID : Serializable, I : Identity<ID>> StoreQuery<ID, I>.allByUuids(ids: List<ID>) =
-        allByUuids(ids)
+    allByUuids(ids)
 
 
 data class PageableData(
-        val page: Int,
-        val size: Int,
+    val page: Int,
+    val size: Int,
 )

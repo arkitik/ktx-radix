@@ -5,7 +5,7 @@ import io.quee.ktx.radix.develop.shared.error.Error
 /**
  * Created By [*Ibrahim Al-Tamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 10, **Wed February, 2021**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 
 infix fun <R> R?.notAcceptable(error: Error) =

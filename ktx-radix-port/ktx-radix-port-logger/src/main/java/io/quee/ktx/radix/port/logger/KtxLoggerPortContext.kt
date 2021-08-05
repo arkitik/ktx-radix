@@ -15,7 +15,7 @@ import java.util.*
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 @Configuration
 @EnableConfigurationProperties(value = [KtxLoggerConfig::class])
@@ -23,7 +23,7 @@ class KtxLoggerPortContext {
     @Bean
     @ConditionalOnMissingBean
     fun logbook(
-        ktxLoggerConfig: KtxLoggerConfig
+        ktxLoggerConfig: KtxLoggerConfig,
     ): Logbook =
         with(Logbook.builder()) {
             correlationId { UUID.randomUUID().toString() }

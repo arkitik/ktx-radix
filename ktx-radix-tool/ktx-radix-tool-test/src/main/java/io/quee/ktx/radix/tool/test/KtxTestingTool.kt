@@ -16,19 +16,19 @@ import kotlin.reflect.KClass
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 class KtxTestingTool(
-        private val parser: DataParser,
-        private val regexReplacer: RegexReplacer,
-        private val processor: Processor
+    private val parser: DataParser,
+    private val regexReplacer: RegexReplacer,
+    private val processor: Processor,
 ) {
     fun <RS : Any> run(
-            resourceFilePath: String,
-            classLoader: ClassLoader = javaClass.classLoader,
-            clazz: KClass<RS>,
-            successCall: (TestCase, RS?) -> Unit,
-            failCall: (TestCase, Throwable) -> Unit
+        resourceFilePath: String,
+        classLoader: ClassLoader = javaClass.classLoader,
+        clazz: KClass<RS>,
+        successCall: (TestCase, RS?) -> Unit,
+        failCall: (TestCase, Throwable) -> Unit,
     ): List<DynamicTest> {
         val jsonInputStream = classLoader.getResourceAsStream(resourceFilePath)
         return if (jsonInputStream != null)
@@ -39,10 +39,10 @@ class KtxTestingTool(
     }
 
     fun <RS : Any> run(
-            jsonInputStream: InputStream,
-            clazz: KClass<RS>,
-            successCall: (TestCase, RS?) -> Unit,
-            failCall: (TestCase, Throwable) -> Unit
+        jsonInputStream: InputStream,
+        clazz: KClass<RS>,
+        successCall: (TestCase, RS?) -> Unit,
+        failCall: (TestCase, Throwable) -> Unit,
     ): List<DynamicTest> {
         val testClassData = parser.run {
             jsonInputStream.parse(TestClassData::class)
@@ -51,72 +51,72 @@ class KtxTestingTool(
     }
 
     fun <RS : Any> run(
-            testClassData: TestClassData,
-            clazz: KClass<RS>,
-            successCall: (TestCase, RS?) -> Unit,
-            failCall: (TestCase, Throwable) -> Unit
+        testClassData: TestClassData,
+        clazz: KClass<RS>,
+        successCall: (TestCase, RS?) -> Unit,
+        failCall: (TestCase, Throwable) -> Unit,
     ): List<DynamicTest> {
         return regexReplacer.run {
             parser.run {
                 testClassData.write().replace()
-                        .scenarios
-                        .map { scenario ->
-                            DynamicTest.dynamicTest(scenario.name) {
-                                scenario.cases.forEach {
-                                    processor.process(it, clazz, successCall, failCall)
-                                }
+                    .scenarios
+                    .map { scenario ->
+                        DynamicTest.dynamicTest(scenario.name) {
+                            scenario.cases.forEach {
+                                processor.process(it, clazz, successCall, failCall)
                             }
                         }
+                    }
             }
         }
     }
 
     companion object {
         fun create(
-                parser: DataParser,
-                rootUrl: String,
-                testCaseSignatureCreator: TestCase.() -> String
+            parser: DataParser,
+            rootUrl: String,
+            testCaseSignatureCreator: TestCase.() -> String,
         ) = create(
+            parser,
+            HttpTestProcessor(
+                rootUrl,
                 parser,
-                HttpTestProcessor(
-                        rootUrl,
-                        parser,
-                        testCaseSignatureCreator
-                )
+                testCaseSignatureCreator
+            )
         )
 
         fun create(
-                processor: Processor
+            processor: Processor,
         ) = create(
-                processor,
-                JacksonDataParser()
+            processor,
+            JacksonDataParser()
         )
 
         fun create(
-                processor: Processor,
-                parser: JacksonDataParser
+            processor: Processor,
+            parser: JacksonDataParser,
         ) = create(
-                parser,
-                processor
+            parser,
+            processor
         )
 
         fun create(
-                parser: DataParser,
-                processor: Processor
+            parser: DataParser,
+            processor: Processor,
         ) = create(
-                parser,
-                DefaultRegexReplacer(parser),
-                processor
+            parser,
+            DefaultRegexReplacer(parser),
+            processor
         )
 
         fun create(
-                parser: DataParser,
-                regexReplacer: RegexReplacer,
-                processor: Processor
+            parser: DataParser,
+            regexReplacer: RegexReplacer,
+            processor: Processor,
         ) = KtxTestingTool(
-                parser,
-                regexReplacer,
-                processor
+            parser,
+            regexReplacer,
+            processor
         )
     }
 }

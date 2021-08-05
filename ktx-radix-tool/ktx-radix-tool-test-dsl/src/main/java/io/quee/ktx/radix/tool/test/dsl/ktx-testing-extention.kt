@@ -11,21 +11,21 @@ import kotlin.reflect.KClass
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 val gson = Gson()
 
 fun <RS : Any> KtxTestingTool.run(
-        jsonObject: JsonObject,
-        clazz: KClass<RS>,
-        successCall: (TestCase, RS?) -> Unit,
-        failCall: (TestCase, Throwable) -> Unit
+    jsonObject: JsonObject,
+    clazz: KClass<RS>,
+    successCall: (TestCase, RS?) -> Unit,
+    failCall: (TestCase, Throwable) -> Unit,
 ): List<DynamicTest> {
     return run(
-            jsonObject.toTestData(),
-            clazz,
-            successCall,
-            failCall
+        jsonObject.toTestData(),
+        clazz,
+        successCall,
+        failCall
     )
 }
 

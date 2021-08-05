@@ -3,7 +3,7 @@ package io.quee.ktx.radix.develop.operation
 /**
  * Created By [*Ibrahim Al-Tamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 21, **Sun February, 2021**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 interface Operation<RQ, RS> {
     fun RQ.operate(): RS
@@ -17,6 +17,13 @@ interface Operator<RQ, RS> {
     fun RQ.operate(response: RS)
 }
 
+@Deprecated(
+    message = "To be removed in v2.0.0, replaced by module ktx-radix-development-operation-ext",
+    replaceWith = ReplaceWith(
+        expression = "operationBuilder {}",
+        "io.quee.ktx.radix.develop.operation.ext.operationBuilder"
+    ),
+)
 fun <RQ, RS> operationBuilder(
     builder: OperationBuilder<RQ, RS>.() -> Unit,
 ): Operation<RQ, RS> =
@@ -25,6 +32,13 @@ fun <RQ, RS> operationBuilder(
             builder()
         }
 
+@Deprecated(
+    message = "To be removed in v2.0.0, replaced by module ktx-radix-development-operation-ext",
+    replaceWith = ReplaceWith(
+        expression = "OperationBuilder",
+        "io.quee.ktx.radix.develop.operation.ext.OperationBuilder"
+    ),
+)
 class OperationBuilder<RQ, RS> : Operation<RQ, RS> {
     private val roles: MutableList<OperationRole<RQ, Unit>> = mutableListOf()
     private val afterOperators: MutableList<Operator<RQ, RS>> = mutableListOf()
@@ -82,5 +96,3 @@ class OperationBuilder<RQ, RS> : Operation<RQ, RS> {
         }
     }
 }
-
-

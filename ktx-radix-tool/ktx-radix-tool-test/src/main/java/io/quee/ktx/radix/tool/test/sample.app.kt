@@ -7,7 +7,7 @@ import io.quee.ktx.radix.tool.test.replacer.DefaultRegexReplacer
 /**
  * Created By [*Ibrahim AlTamimi *](https://www.linkedin.com/in/iloom/)
  * Created At 30, **Fri Oct, 2020**
- * Project *ktx-radix* [Quee.IO]
+ * Project *ktx-radix* [https://quee.io]
  */
 class SampleApp
 
@@ -16,7 +16,8 @@ fun main() {
     val regexReplacer = DefaultRegexReplacer(dataParser)
     val testClassData = with(regexReplacer) {
         dataParser.run {
-            val testClassData = SampleApp::class.java.classLoader.getResourceAsStream("sample.json")!!.parse(TestClassData::class)
+            val testClassData =
+                SampleApp::class.java.classLoader.getResourceAsStream("sample.json")!!.parse(TestClassData::class)
             testClassData.write()
         }.replace()
     }
