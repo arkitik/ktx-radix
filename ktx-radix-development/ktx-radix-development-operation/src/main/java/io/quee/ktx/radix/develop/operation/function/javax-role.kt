@@ -2,6 +2,7 @@ package io.quee.ktx.radix.develop.operation.function
 
 import io.quee.ktx.radix.develop.operation.OperationRole
 import io.quee.ktx.radix.develop.shared.error.Error
+import io.quee.ktx.radix.develop.shared.error.ErrorResponse
 import io.quee.ktx.radix.develop.shared.ext.badRequest
 import javax.validation.ConstraintViolation
 import javax.validation.Validation
@@ -54,7 +55,7 @@ open class JavaXValidator internal constructor(
     ),
 )
 object DefaultErrorMapper : ErrorMapper {
-    override fun <RQ> ConstraintViolation<RQ>.mapToError(): Error {
+    override fun <RQ> ConstraintViolation<RQ>.mapToError(): ErrorResponse {
         val nodes = propertyPath.toList()
         return when {
             nodes.isNotEmpty() -> {
@@ -73,5 +74,5 @@ object DefaultErrorMapper : ErrorMapper {
     ),
 )
 interface ErrorMapper {
-    fun <RQ> ConstraintViolation<RQ>.mapToError(): Error
+    fun <RQ> ConstraintViolation<RQ>.mapToError(): ErrorResponse
 }

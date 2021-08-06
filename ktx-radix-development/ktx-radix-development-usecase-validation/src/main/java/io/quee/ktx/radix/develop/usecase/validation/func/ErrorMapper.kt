@@ -1,6 +1,6 @@
 package io.quee.ktx.radix.develop.usecase.validation.func
 
-import io.quee.ktx.radix.develop.shared.error.Error
+import io.quee.ktx.radix.develop.shared.error.ErrorResponse
 import io.quee.ktx.radix.develop.usecase.model.UseCaseRequest
 import javax.validation.ConstraintViolation
 
@@ -10,5 +10,5 @@ import javax.validation.ConstraintViolation
  * Project *ktx-radix* [https://quee.io]
  */
 interface ErrorMapper {
-    fun <RQ : UseCaseRequest> ConstraintViolation<RQ>.mapToError(): Error
+    fun <RQ : UseCaseRequest> ConstraintViolation<RQ>.mapToError(): ErrorResponse
 }

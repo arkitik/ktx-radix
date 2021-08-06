@@ -1,6 +1,7 @@
 package io.quee.ktx.radix.develop.usecase.validation.func
 
 import io.quee.ktx.radix.develop.shared.error.Error
+import io.quee.ktx.radix.develop.shared.error.ErrorResponse
 import io.quee.ktx.radix.develop.shared.ext.badRequest
 import io.quee.ktx.radix.develop.usecase.model.UseCaseRequest
 import javax.validation.ConstraintViolation
@@ -42,11 +43,11 @@ open class DefaultUseCaseValidator internal constructor(
     }
 
     class DefaultErrorMapper : ErrorMapper {
-        override fun <RQ : UseCaseRequest> ConstraintViolation<RQ>.mapToError(): Error {
+        override fun <RQ : UseCaseRequest> ConstraintViolation<RQ>.mapToError(): ErrorResponse {
             val nodes = propertyPath.toList()
             return when {
                 nodes.isNotEmpty() -> {
-                    Error(nodes[nodes.size - 1].name, message)
+                    Error(nodes.last().name, message)
                 }
                 else -> Error(message, propertyPath.toString())
             }

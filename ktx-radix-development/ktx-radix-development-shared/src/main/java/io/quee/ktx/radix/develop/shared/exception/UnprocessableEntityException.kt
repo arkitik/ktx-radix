@@ -7,6 +7,6 @@ import io.quee.ktx.radix.develop.shared.error.ErrorResponse
  * Created At 29, **Thu Oct, 2020**
  * Project *ktx-radix* [https://quee.io]
  */
-class NotAcceptableException(
+class UnprocessableEntityException(
     error: ErrorResponse,
 ) : BaseException(error)

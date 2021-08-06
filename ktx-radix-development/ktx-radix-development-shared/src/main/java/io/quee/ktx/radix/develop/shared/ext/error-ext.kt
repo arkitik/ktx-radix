@@ -1,6 +1,6 @@
 package io.quee.ktx.radix.develop.shared.ext
 
-import io.quee.ktx.radix.develop.shared.error.Error
+import io.quee.ktx.radix.develop.shared.error.ErrorResponse
 import io.quee.ktx.radix.develop.shared.exception.*
 
 /**
@@ -8,14 +8,16 @@ import io.quee.ktx.radix.develop.shared.exception.*
  * Created At 29, **Thu Oct, 2020**
  * Project *ktx-radix* [https://quee.io]
  */
-fun Error.notFound() = ResourceNotFoundException(this)
+fun ErrorResponse.notFound() = ResourceNotFoundException(this)
 
-fun Error.notAuthorized() = NotAuthorizedException(this)
+fun ErrorResponse.notAuthorized() = NotAuthorizedException(this)
 
-fun Error.notAcceptable() = NotAcceptableException(this)
+fun ErrorResponse.notAcceptable() = NotAcceptableException(this)
 
-fun Error.internal() = InternalException(this)
+fun ErrorResponse.unprocessableEntity() = UnprocessableEntityException(this)
 
-fun Error.badRequest() = listOf(this).badRequest()
+fun ErrorResponse.internal() = InternalException(this)
 
-fun List<Error>.badRequest() = BadRequestException(this)
+fun ErrorResponse.badRequest() = listOf(this).badRequest()
+
+fun List<ErrorResponse>.badRequest() = BadRequestException(this)
