@@ -7,7 +7,7 @@
     <groupId>io.quee.ktx.radix</groupId>
     <artifactId>ktx-radix</artifactId>
     <packaging>pom</packaging>
-    <version>v1.2.8</version>
+    <version>v1.3.0</version>
     <modules>
         <module>ktx-radix-port</module>
         <module>ktx-radix-adapter</module>
@@ -16,7 +16,11 @@
         <module>ktx-radix-starter</module>
         <module>ktx-radix-tool</module>
     </modules>
-
+    <distributionManagement>
+        <relocation>
+            <groupId>io.arkitik.ktx.radix</groupId>
+        </relocation>
+    </distributionManagement>
     <name>Ktx-Radix Business Framework</name>
     <description>
         Shared business abstraction modules to develop any server project using kotlin
