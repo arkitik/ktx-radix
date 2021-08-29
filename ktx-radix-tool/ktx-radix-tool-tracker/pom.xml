@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>ktx-radix-tool</artifactId>
-        <groupId>io.quee.ktx.radix</groupId>
+        <groupId>io.arkitik.ktx.radix</groupId>
         <version>v1.3.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>

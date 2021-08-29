@@ -1,6 +1,6 @@
 {
-  "id": "https://radix.quee.io/ktx-radix-tool-test/schema",
-  "$schema": "https://radix.quee.io/ktx-radix-tool-test/schema#",
+  "id": "https://radix.arkitik.io/ktx-radix-tool-test/schema",
+  "$schema": "https://radix.arkitik.io/ktx-radix-tool-test/schema#",
   "description": "Radix Testing Tool Schema",
   "type": "object",
   "required": [

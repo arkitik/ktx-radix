@@ -1,1 +1,2 @@
-mvn clean dokka:javadocJar install -X -T 10C nexus-staging:deploy
+mvn clean install -T 10C
+mvn package dokka:javadocJar gpg:sign nexus-staging:deploy

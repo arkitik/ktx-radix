@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.quee.ktx.radix</groupId>
+    <groupId>io.arkitik.ktx.radix</groupId>
     <artifactId>ktx-radix</artifactId>
     <packaging>pom</packaging>
     <version>v1.3.0</version>
@@ -25,7 +25,7 @@
     <description>
         Shared business abstraction modules to develop any server project using kotlin
     </description>
-    <url>https://github.com/Quee-io/ktx-radix</url>
+    <url>https://github.com/arkitik-io/ktx-radix</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -37,15 +37,15 @@
             <name>Ibrahim Al-Tamimi</name>
             <url>https://www.linkedin.com/in/iloom/</url>
             <email>ibm.iloom@gmail.com</email>
-            <organization>QueeIO</organization>
-            <organizationUrl>https://quee.io</organizationUrl>
+            <organization>arkitikIO</organization>
+            <organizationUrl>https://arkitik.io</organizationUrl>
             <roles>
                 <role>Developer</role>
             </roles>
         </developer>
     </developers>
     <scm>
-        <url>https://github.com/Quee-io/ktx-radix.git</url>
+        <url>https://github.com/arkitik-io/ktx-radix.git</url>
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
