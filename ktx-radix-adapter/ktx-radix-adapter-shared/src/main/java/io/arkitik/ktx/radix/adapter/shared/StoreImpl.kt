@@ -36,5 +36,4 @@ abstract class StoreImpl<ID : Serializable, I : Identity<ID>, E : I>(
         }
 
     override val storeQuery: StoreQuery<ID, I> = StoreQueryImpl(repository)
-
 }

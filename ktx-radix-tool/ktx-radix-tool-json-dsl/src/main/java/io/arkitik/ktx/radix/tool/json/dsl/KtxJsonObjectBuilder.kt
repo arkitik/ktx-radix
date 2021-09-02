@@ -36,5 +36,4 @@ class KtxJsonObjectBuilder internal constructor() {
     internal fun build(): JsonObject {
         return jsonObject
     }
-
 }

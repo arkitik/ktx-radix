@@ -16,10 +16,10 @@ import kotlin.reflect.KClass
  */
 class HttpRequestProcessor {
     private constructor(rootUrl: String) {
-        val tcpClient = TcpClient.create()
+        val httpClient = HttpClient.create()
             .option(ChannelOption.SO_KEEPALIVE, true)
         webClient = WebClient.builder()
-            .clientConnector(ReactorClientHttpConnector(HttpClient.from(tcpClient)))
+            .clientConnector(ReactorClientHttpConnector(httpClient))
             .defaultHeader("Keep-Alive", "timeout=5")
             .baseUrl(rootUrl)
             .build()
@@ -30,7 +30,6 @@ class HttpRequestProcessor {
     }
 
     private val webClient: WebClient
-
 
     fun <T, RS : Any> postBlocking(
         request: RequestData<T>,
@@ -57,7 +56,6 @@ class HttpRequestProcessor {
             errorHandler(e)
         }
     }
-
 
     fun <T, RS : Any> patchBlocking(
         request: RequestData<T>,
@@ -171,7 +169,6 @@ class HttpRequestProcessor {
             return HttpRequestProcessor(webClient)
         }
     }
-
 }
 
 data class RequestData<T>(
