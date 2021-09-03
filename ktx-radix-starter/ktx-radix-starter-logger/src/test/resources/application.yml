@@ -1,7 +1,7 @@
 ktx:
   logger:
     formatter: json
-    logger-name: io.quee.ktx.radix.starter.logger.SampleApp
+    logger-name: io.arkitik.ktx.radix.starter.logger.SampleApp
     masked-keys:
       - userUuid
       - user-agent
@@ -9,6 +9,6 @@ ktx:
 logging:
   level:
     io:
-      quee: debug
+      arkitik: debug
 server:
   port: 8081

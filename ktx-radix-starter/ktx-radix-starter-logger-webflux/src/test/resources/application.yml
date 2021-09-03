@@ -1,7 +1,7 @@
 ktx:
   logger:
     formatter: json
-    logger-name: io.quee.ktx.radix.starter.logger.webflux.SampleFluxApp
+    logger-name: io.arkitik.ktx.radix.starter.logger.webflux.SampleFluxApp
     masked-keys:
       - userUuid
       - user-agent
@@ -9,6 +9,6 @@ ktx:
 logging:
   level:
     io:
-      quee: trace
+      arkitik: trace
 server:
   port: 8999
